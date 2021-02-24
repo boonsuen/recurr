@@ -3,6 +3,8 @@ package com.boonsuen.recurr.fragments.list
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -13,11 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.boonsuen.recurr.R
 import com.boonsuen.recurr.data.viewmodel.SubscriptionViewModel
+import com.boonsuen.recurr.fragments.SharedViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListFragment : Fragment() {
 
     private val mSubscriptionDataViewModel: SubscriptionViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
 
     private val adapter: ListAdapter by lazy { ListAdapter() }
 
@@ -33,7 +37,11 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
 
         mSubscriptionDataViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
+            mSharedViewModel.checkIfDatabaseEmpty(data)
             adapter.setData(data)
+        })
+        mSharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
+            showEmptyDatabaseViews(it)
         })
 
         view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener {
@@ -44,6 +52,16 @@ class ListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         return view
+    }
+
+    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
+        if (emptyDatabase) {
+            view?.findViewById<ImageView>(R.id.no_data_imageView)?.visibility = View.VISIBLE
+            view?.findViewById<TextView>(R.id.no_data_textView)?.visibility = View.VISIBLE
+        } else {
+            view?.findViewById<ImageView>(R.id.no_data_imageView)?.visibility = View.INVISIBLE
+            view?.findViewById<TextView>(R.id.no_data_textView)?.visibility = View.INVISIBLE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
