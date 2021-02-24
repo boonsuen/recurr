@@ -20,4 +20,8 @@ class SubscriptionRepository(private val subscriptionDao: SubscriptionDao) {
         subscriptionDao.deleteItem(subscriptionData)
     }
 
+    suspend fun deleteAll() {
+        subscriptionDao.deleteAll()
+    }
+
 }

@@ -40,4 +40,10 @@ class SubscriptionViewModel(application: Application): AndroidViewModel(applicat
         }
     }
 
+    fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAll()
+        }
+    }
+
 }
