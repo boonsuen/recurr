@@ -35,12 +35,12 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:ellipsize="end"
-            android:scrollHorizontally="true"
             android:maxLines="1"
             android:text="Subscription Name"
             android:textColor="@color/darkGray"
             android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/billing_period_indicator"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

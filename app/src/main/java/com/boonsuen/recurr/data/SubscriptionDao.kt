@@ -1,10 +1,7 @@
 package com.boonsuen.recurr.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.boonsuen.recurr.data.models.SubscriptionData
 
 @Dao
@@ -16,4 +13,9 @@ interface SubscriptionDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertData(subscriptionData: SubscriptionData)
 
+    @Update
+    suspend fun updateData(subscriptionData: SubscriptionData)
+
+    @Delete
+    suspend fun deleteItem(subscriptionData: SubscriptionData)
 }

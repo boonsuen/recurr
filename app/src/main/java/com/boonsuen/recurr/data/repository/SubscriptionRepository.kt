@@ -12,4 +12,12 @@ class SubscriptionRepository(private val subscriptionDao: SubscriptionDao) {
         subscriptionDao.insertData(subscriptionData)
     }
 
+    suspend fun updateData(subscriptionData: SubscriptionData) {
+        subscriptionDao.updateData(subscriptionData)
+    }
+
+    suspend fun deleteItem(subscriptionData: SubscriptionData) {
+        subscriptionDao.deleteItem(subscriptionData)
+    }
+
 }

@@ -47,4 +47,12 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun parseBillingPeriodToInt(billingPeriod: BillingPeriod): Int {
+        return when (billingPeriod) {
+            BillingPeriod.MONTHLY -> 0
+            BillingPeriod.WEEKLY -> 1
+            BillingPeriod.YEARLY -> 2
+        }
+    }
+
 }

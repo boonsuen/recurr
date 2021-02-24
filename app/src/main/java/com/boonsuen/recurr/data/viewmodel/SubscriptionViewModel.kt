@@ -15,7 +15,7 @@ class SubscriptionViewModel(application: Application): AndroidViewModel(applicat
     private val subscriptionDao = SubscriptionDatabase.getDatabase(application).subscriptionDao()
     private val repository: SubscriptionRepository
 
-    private val getAllData: LiveData<List<SubscriptionData>>
+    val getAllData: LiveData<List<SubscriptionData>>
 
     init {
         repository = SubscriptionRepository(subscriptionDao)
@@ -25,6 +25,18 @@ class SubscriptionViewModel(application: Application): AndroidViewModel(applicat
     fun insertData(subscriptionData: SubscriptionData) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertData(subscriptionData)
+        }
+    }
+
+    fun updateData(subscriptionData: SubscriptionData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateData(subscriptionData)
+        }
+    }
+
+    fun deleteItem(subscriptionData: SubscriptionData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteItem(subscriptionData)
         }
     }
 
