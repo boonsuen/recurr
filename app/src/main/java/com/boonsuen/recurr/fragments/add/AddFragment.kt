@@ -35,6 +35,8 @@ class AddFragment : Fragment() {
         // Set Menu
         setHasOptionsMenu(true)
 
+        binding.billingPeriodSpinner.onItemSelectedListener = mSharedViewModel.listener
+
         return view
     }
 
