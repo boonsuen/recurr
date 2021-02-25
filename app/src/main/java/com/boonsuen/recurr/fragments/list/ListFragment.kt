@@ -18,6 +18,7 @@ import com.boonsuen.recurr.data.viewmodel.SubscriptionViewModel
 import com.boonsuen.recurr.databinding.FragmentAddBinding
 import com.boonsuen.recurr.databinding.FragmentListBinding
 import com.boonsuen.recurr.fragments.SharedViewModel
+import com.boonsuen.recurr.utils.hideKeyboard
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListFragment : Fragment() {
@@ -51,6 +52,9 @@ class ListFragment : Fragment() {
 
         // Set Menu
         setHasOptionsMenu(true)
+
+        // Hide soft keyboard
+        hideKeyboard(requireActivity())
 
         return view
     }
