@@ -3,11 +3,9 @@
     <string name="no_data">"Get started by adding\nyour first subscription"</string>
     <string name="name">Name e.g. Spotify</string>
     <string name="amount">Amount $</string>
-    <string name="search">Search</string>
-    <string name="sort_by">Sort By</string>
-    <string name="monthly">Monthly</string>
-    <string name="weekly">Weekly</string>
-    <string name="yearly">Yearly</string>
+    <string name="sort_by_billing_period">Sort by Billing Period</string>
+    <string name="short_to_long">Short to Long</string>
+    <string name="long_to_short">Long to Short</string>
     <string name="delete_all">Delete All</string>
     <string name="add">Add</string>
     <string name="save">Save</string>

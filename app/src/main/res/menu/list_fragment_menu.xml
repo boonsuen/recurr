@@ -2,28 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/menu_search"
-        android:title="@string/search"
-        android:icon="@drawable/ic_search"
-        android:iconTint="@color/white"
-        app:showAsAction="ifRoom"
-        app:actionViewClass="androidx.appcompat.widget.SearchView" />
-
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_sortBy"
-            android:title="@string/sort_by">
+            android:title="@string/sort_by_billing_period">
             <menu>
                 <item
-                    android:id="@+id/menu_billing_period_monthly"
-                    android:title="@string/monthly" />
+                    android:id="@+id/menu_short_to_long"
+                    android:title="@string/short_to_long" />
                 <item
-                    android:id="@+id/menu_billing_period_weekly"
-                    android:title="@string/weekly" />
-                <item
-                    android:id="@+id/menu_billing_period_yearly"
-                    android:title="@string/yearly" />
+                    android:id="@+id/menu_long_to_short"
+                    android:title="@string/long_to_short" />
             </menu>
         </item>
     </group>

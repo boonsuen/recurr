@@ -7,6 +7,8 @@ import com.boonsuen.recurr.data.models.SubscriptionData
 class SubscriptionRepository(private val subscriptionDao: SubscriptionDao) {
 
     val getAllData: LiveData<List<SubscriptionData>> = subscriptionDao.getAllData()
+    val sortByBillingPeriodShortToLong: LiveData<List<SubscriptionData>> = subscriptionDao.sortByBillingPeriodShortToLong()
+    val sortByBillingPeriodLongToShort: LiveData<List<SubscriptionData>> = subscriptionDao.sortByBillingPeriodLongToShort()
 
     suspend fun insertData(subscriptionData: SubscriptionData) {
         subscriptionDao.insertData(subscriptionData)

@@ -21,4 +21,10 @@ interface SubscriptionDao {
 
     @Query("DELETE FROM subscription_table")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM subscription_table ORDER BY CASE WHEN billingPeriod LIKE 'W%' THEN 1 WHEN billingPeriod LIKE 'M%' THEN 2 WHEN billingPeriod LIKE 'Y%' THEN 3 END")
+    fun sortByBillingPeriodShortToLong(): LiveData<List<SubscriptionData>>
+
+    @Query("SELECT * FROM subscription_table ORDER BY CASE WHEN billingPeriod LIKE 'Y%' THEN 1 WHEN billingPeriod LIKE 'M%' THEN 2 WHEN billingPeriod LIKE 'W%' THEN 3 END")
+    fun sortByBillingPeriodLongToShort(): LiveData<List<SubscriptionData>>
 }

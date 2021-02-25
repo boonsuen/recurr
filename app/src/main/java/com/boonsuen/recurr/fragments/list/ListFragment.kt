@@ -22,7 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListFragment : Fragment() {
 
-    private val mSubscriptionDataViewModel: SubscriptionViewModel by viewModels()
+    private val mSubscriptionViewModel: SubscriptionViewModel by viewModels()
     private val mSharedViewModel: SharedViewModel by viewModels()
 
     private val adapter: ListAdapter by lazy { ListAdapter() }
@@ -44,7 +44,7 @@ class ListFragment : Fragment() {
         setupRecyclerView()
 
         // Observe LiveData
-        mSubscriptionDataViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
+        mSubscriptionViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
             mSharedViewModel.checkIfDatabaseEmpty(data)
             adapter.setData(data)
         })
@@ -66,8 +66,10 @@ class ListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete_all) {
-            confirmRemoval()
+        when (item.itemId) {
+            R.id.menu_delete_all -> confirmRemoval()
+            R.id.menu_short_to_long -> mSubscriptionViewModel.sortByBillingPeriodShortToLong.observe(this, Observer { adapter.setData(it) })
+            R.id.menu_long_to_short -> mSubscriptionViewModel.sortByBillingPeriodLongToShort.observe(this, Observer { adapter.setData(it) })
         }
         return super.onOptionsItemSelected(item)
     }
@@ -76,7 +78,7 @@ class ListFragment : Fragment() {
     private fun confirmRemoval() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
-            mSubscriptionDataViewModel.deleteAll()
+            mSubscriptionViewModel.deleteAll()
             Toast.makeText(
                     requireContext(),
                     "Successfully removed everything!",
