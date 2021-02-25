@@ -21,8 +21,6 @@ class AddFragment : Fragment() {
     private val mSharedViewModel: SharedViewModel by viewModels()
 
     private var _binding: FragmentAddBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -72,5 +70,10 @@ class AddFragment : Fragment() {
         } else {
             Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

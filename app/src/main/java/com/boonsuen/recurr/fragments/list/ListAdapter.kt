@@ -1,5 +1,6 @@
 package com.boonsuen.recurr.fragments.list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,41 +13,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.boonsuen.recurr.R
 import com.boonsuen.recurr.data.models.BillingPeriod
 import com.boonsuen.recurr.data.models.SubscriptionData
+import com.boonsuen.recurr.databinding.RowLayoutBinding
 
 class ListAdapter: RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    var dataList = emptyList<SubscriptionData>()
+    private var dataList = emptyList<SubscriptionData>()
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(private val binding: RowLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(subscriptionData: SubscriptionData) {
+            binding.subscriptionData = subscriptionData
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): MyViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = RowLayoutBinding.inflate(layoutInflater, parent, false)
+                return MyViewHolder(binding)
+            }
+        }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_layout, parent, false))
+        return MyViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.itemView.findViewById<TextView>(R.id.name_txt).text = dataList[position].name
-        holder.itemView.findViewById<TextView>(R.id.amount_txt).text = dataList[position].amount.toString()
-        holder.itemView.findViewById<ConstraintLayout>(R.id.row_background).setOnClickListener {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(dataList[position])
-            holder.itemView.findNavController().navigate(action)
-        }
-
-        when (dataList[position].billingPeriod) {
-            BillingPeriod.MONTHLY -> holder.itemView.findViewById<CardView>(R.id.billing_period_indicator).setCardBackgroundColor(ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.red
-            ))
-            BillingPeriod.WEEKLY -> holder.itemView.findViewById<CardView>(R.id.billing_period_indicator).setCardBackgroundColor(ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.yellow
-            ))
-            BillingPeriod.YEARLY -> holder.itemView.findViewById<CardView>(R.id.billing_period_indicator).setCardBackgroundColor(ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.green
-            ))
-        }
+        val currentItem = dataList[position]
+        holder.bind(currentItem)
     }
 
     fun setData(subscriptionData: List<SubscriptionData>) {

@@ -14,11 +14,15 @@ import com.boonsuen.recurr.data.models.SubscriptionData
 
 class SharedViewModel(application: Application): AndroidViewModel(application) {
 
+    /** ============== List Fragment ============== */
+
     val emptyDatabase: MutableLiveData<Boolean> = MutableLiveData(true)
 
     fun checkIfDatabaseEmpty(subscriptionData: List<SubscriptionData>) {
         emptyDatabase.value = subscriptionData.isEmpty()
     }
+
+    /** ============== Add/Update Fragment ============== */
 
     val listener: AdapterView.OnItemSelectedListener = object :
         AdapterView.OnItemSelectedListener {
@@ -52,14 +56,6 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
             "Yearly" -> {
                 BillingPeriod.YEARLY}
             else -> BillingPeriod.MONTHLY
-        }
-    }
-
-    fun parseBillingPeriodToInt(billingPeriod: BillingPeriod): Int {
-        return when (billingPeriod) {
-            BillingPeriod.MONTHLY -> 0
-            BillingPeriod.WEEKLY -> 1
-            BillingPeriod.YEARLY -> 2
         }
     }
 

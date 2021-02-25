@@ -34,15 +34,14 @@ class UpdateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentUpdateBinding.inflate(inflater, container, false)
+        binding.args = args
         val view = binding.root
 
         // Set Menu
         setHasOptionsMenu(true)
 
-        view.findViewById<EditText>(R.id.current_name_et).setText(args.currentItem.name)
-        view.findViewById<EditText>(R.id.current_amount_et).setText(args.currentItem.amount.toString())
-        view.findViewById<Spinner>(R.id.current_billing_period_spinner).setSelection(mSharedViewModel.parseBillingPeriodToInt(args.currentItem.billingPeriod))
-        view.findViewById<Spinner>(R.id.current_billing_period_spinner).onItemSelectedListener = mSharedViewModel.listener
+        // Spinner Item Selected Listener
+        binding.currentBillingPeriodSpinner.onItemSelectedListener = mSharedViewModel.listener
 
         return view
     }
@@ -98,5 +97,10 @@ class UpdateFragment : Fragment() {
         builder.setTitle("Delete '${args.currentItem.name}'?")
         builder.setMessage("Are you sure you want to remove '${args.currentItem.name}'?")
         builder.create().show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
