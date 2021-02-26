@@ -7,47 +7,103 @@
     android:padding="24dp"
     tools:context=".fragments.add.AddFragment">
 
-    <EditText
-        android:id="@+id/name_et"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="@string/name"
-        android:background="@drawable/custom_input"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
+    <TextView
+        android:id="@+id/add_title_tv"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="#060048"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a Subscription"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/label_name_tv"
+        android:fontFamily="@font/inter_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Name"
+        android:textColor="#002148"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_title_tv" />
+
     <EditText
-        android:id="@+id/amount_et"
+        android:id="@+id/name_et"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="16sp"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/custom_input"
-        android:hint="@string/amount"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_name_tv" />
+
+    <TextView
+        android:id="@+id/label_amount_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="Amount"
+        android:textColor="#002148"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_et" />
 
-    <Spinner
-        android:id="@+id/billing_period_spinner"
+    <EditText
+        android:id="@+id/amount_et"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="16sp"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
-        android:entries="@array/billing_period"
         android:background="@drawable/custom_input"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:ems="10"
+        android:hint="@string/amount"
+        android:inputType="numberDecimal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_amount_tv" />
+
+    <TextView
+        android:id="@+id/label_billing_period_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/inter_regular"
+        android:text="Billing Period"
+        android:textColor="#002148"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amount_et" />
+
+    <Spinner
+        android:id="@+id/billing_period_spinner"
+        android:fontFamily="@font/inter_regular"
+        android:textSize="16sp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_input"
+        android:entries="@array/billing_period"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_billing_period_tv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

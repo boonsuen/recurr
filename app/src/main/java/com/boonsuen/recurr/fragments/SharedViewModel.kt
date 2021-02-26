@@ -42,9 +42,7 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         }
 
     fun verifyDataFromUser(name: String, amount: String): Boolean {
-        return if (TextUtils.isEmpty(name) || TextUtils.isEmpty(amount)) {
-            false
-        } else !(name.isEmpty() || amount.isEmpty())
+        return !(TextUtils.isEmpty(name) || TextUtils.isEmpty(amount))
     }
 
     fun parseBillingPeriod(billingPeriod: String): BillingPeriod {

@@ -59,7 +59,7 @@ class UpdateFragment : Fragment() {
     }
 
     private fun updateItem() {
-        val name = binding.currentNameEt.text.toString()
+        val name = binding.currentNameEt.text.toString().trim()
         val amount = binding.currentAmountEt.text.toString()
         val getBillingPeriod = binding.currentBillingPeriodSpinner.selectedItem.toString()
 

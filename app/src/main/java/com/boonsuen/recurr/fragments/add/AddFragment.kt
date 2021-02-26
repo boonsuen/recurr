@@ -50,7 +50,7 @@ class AddFragment : Fragment() {
     }
 
     private fun insertDataToDb() {
-        val mName = binding.nameEt.text.toString()
+        val mName = binding.nameEt.text.toString().trim()
         val mAmount = binding.amountEt.text.toString()
         val mBillingPeriod = binding.billingPeriodSpinner.selectedItem.toString()
 
