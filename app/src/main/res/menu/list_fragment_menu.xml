@@ -4,18 +4,53 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/menu_sortBy"
+            android:id="@+id/menu_sortBy_name"
+            android:title="Sort by Name">
+            <menu>
+                <item
+                    android:id="@+id/menu_sortBy_name_ascending"
+                    android:title="Ascending" />
+                <item
+                    android:id="@+id/menu_sortBy_name_descending"
+                    android:title="Descending" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_sortBy_amount"
+            android:title="Sort by Amount">
+            <menu>
+                <item
+                    android:id="@+id/menu_sortBy_amount_low_to_high"
+                    android:title="Low to High" />
+                <item
+                    android:id="@+id/menu_sortBy_amount_high_to_low"
+                    android:title="High to Low" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_sortBy_billingPeriod"
             android:title="@string/sort_by_billing_period">
             <menu>
                 <item
-                    android:id="@+id/menu_short_to_long"
+                    android:id="@+id/menu_sortBy_billingPeriod_short_to_long"
                     android:title="@string/short_to_long" />
                 <item
-                    android:id="@+id/menu_long_to_short"
+                    android:id="@+id/menu_sortBy_billingPeriod_long_to_short"
                     android:title="@string/long_to_short" />
             </menu>
         </item>
     </group>
+
+    <item
+        android:id="@+id/menu_clear_sorting"
+        android:title="Clear Sort"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/menu_delete_all"

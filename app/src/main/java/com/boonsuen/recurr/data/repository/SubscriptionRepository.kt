@@ -7,6 +7,8 @@ import com.boonsuen.recurr.data.models.SubscriptionData
 class SubscriptionRepository(private val subscriptionDao: SubscriptionDao) {
 
     val getAllData: LiveData<List<SubscriptionData>> = subscriptionDao.getAllData()
+    val sortByNameAscending: LiveData<List<SubscriptionData>> = subscriptionDao.sortByNameAscending()
+    val sortByNameDescending: LiveData<List<SubscriptionData>> = subscriptionDao.sortByNameDescending()
     val sortByBillingPeriodShortToLong: LiveData<List<SubscriptionData>> = subscriptionDao.sortByBillingPeriodShortToLong()
     val sortByBillingPeriodLongToShort: LiveData<List<SubscriptionData>> = subscriptionDao.sortByBillingPeriodLongToShort()
 

@@ -16,12 +16,16 @@ class SubscriptionViewModel(application: Application): AndroidViewModel(applicat
     private val repository: SubscriptionRepository
 
     val getAllData: LiveData<List<SubscriptionData>>
+    val sortByNameAscending: LiveData<List<SubscriptionData>>
+    val sortByNameDescending: LiveData<List<SubscriptionData>>
     val sortByBillingPeriodShortToLong: LiveData<List<SubscriptionData>>
     val sortByBillingPeriodLongToShort: LiveData<List<SubscriptionData>>
 
     init {
         repository = SubscriptionRepository(subscriptionDao)
         getAllData = repository.getAllData
+        sortByNameAscending = repository.sortByNameAscending
+        sortByNameDescending = repository.sortByNameDescending
         sortByBillingPeriodShortToLong = repository.sortByBillingPeriodShortToLong
         sortByBillingPeriodLongToShort = repository.sortByBillingPeriodLongToShort
     }
