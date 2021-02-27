@@ -73,8 +73,11 @@ class ListFragment : Fragment() {
         when (item.itemId) {
             R.id.menu_sortBy_name_ascending -> mSubscriptionViewModel.sortByNameAscending.observe(this, { adapter.setData(it) })
             R.id.menu_sortBy_name_descending -> mSubscriptionViewModel.sortByNameDescending.observe(this, { adapter.setData(it) })
+            R.id.menu_sortBy_amount_low_to_high -> mSubscriptionViewModel.sortByAmountLowToHigh.observe(this, { adapter.setData(it) })
+            R.id.menu_sortBy_amount_high_to_low -> mSubscriptionViewModel.sortByAmountHighToLow.observe(this, { adapter.setData(it) })
             R.id.menu_sortBy_billingPeriod_short_to_long -> mSubscriptionViewModel.sortByBillingPeriodShortToLong.observe(this, Observer { adapter.setData(it) })
             R.id.menu_sortBy_billingPeriod_long_to_short -> mSubscriptionViewModel.sortByBillingPeriodLongToShort.observe(this, Observer { adapter.setData(it) })
+            R.id.menu_clear_sort -> mSubscriptionViewModel.getAllData.observe(this, { adapter.setData(it) })
             R.id.menu_delete_all -> confirmRemoval()
         }
         return super.onOptionsItemSelected(item)

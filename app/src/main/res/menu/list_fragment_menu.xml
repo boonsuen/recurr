@@ -48,7 +48,7 @@
     </group>
 
     <item
-        android:id="@+id/menu_clear_sorting"
+        android:id="@+id/menu_clear_sort"
         android:title="Clear Sort"
         app:showAsAction="never" />
 
