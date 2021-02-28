@@ -31,4 +31,11 @@
         <item name="android:textColorSecondary">@color/darkGray</item>
     </style>
 
+    <style name="CustomRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:button">@null</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textColor">@color/color_button_text</item>
+    </style>
+
 </resources>

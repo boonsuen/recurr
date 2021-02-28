@@ -71,6 +71,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.30"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.1"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.4.30"
 
     // DataBinding
     kapt "com.android.databinding:compiler:3.2.0-alpha10"

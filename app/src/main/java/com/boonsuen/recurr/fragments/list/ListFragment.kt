@@ -2,8 +2,10 @@ package com.boonsuen.recurr.fragments.list
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -14,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.boonsuen.recurr.R
+import com.boonsuen.recurr.data.models.BillingPeriod
+import com.boonsuen.recurr.data.models.SubscriptionData
 import com.boonsuen.recurr.data.viewmodel.SubscriptionViewModel
 import com.boonsuen.recurr.databinding.FragmentAddBinding
 import com.boonsuen.recurr.databinding.FragmentListBinding
@@ -34,7 +38,7 @@ class ListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Data binding
         _binding = FragmentListBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
@@ -44,10 +48,25 @@ class ListFragment : Fragment() {
         // Setup RecyclerView
         setupRecyclerView()
 
-        // Observe LiveData
+        binding.radioButtonMonthly.isChecked = true
+       // Observe LiveData
         mSubscriptionViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
             mSharedViewModel.checkIfDatabaseEmpty(data)
             adapter.setData(data)
+
+            // Expenses Overview
+            when (binding.radioGroupSelection.checkedRadioButtonId) {
+                R.id.radioButtonWeekly -> updateExpensesOverviewAmount(data, "WEEKLY")
+                R.id.radioButtonMonthly -> updateExpensesOverviewAmount(data, "MONTHLY")
+                R.id.radioButtonYearly -> updateExpensesOverviewAmount(data, "YEARLY")
+            }
+            binding.radioGroupSelection.setOnCheckedChangeListener {group, checkedId ->
+                when (checkedId) {
+                    R.id.radioButtonWeekly -> updateExpensesOverviewAmount(data, "WEEKLY")
+                    R.id.radioButtonMonthly -> updateExpensesOverviewAmount(data, "MONTHLY")
+                    R.id.radioButtonYearly -> updateExpensesOverviewAmount(data, "YEARLY")
+                }
+            }
         })
 
         // Set Menu
@@ -57,6 +76,59 @@ class ListFragment : Fragment() {
         hideKeyboard(requireActivity())
 
         return view
+    }
+
+    private fun updateExpensesOverviewAmount(data: List<SubscriptionData>, period: String) {
+
+        fun parseBillingPeriod(billingPeriod: BillingPeriod): String {
+            return when (billingPeriod) {
+                BillingPeriod.MONTHLY -> "MONTHLY"
+                BillingPeriod.WEEKLY -> "WEEKLY"
+                BillingPeriod.YEARLY -> "YEARLY"
+            }
+        }
+        var calcAmount = 0.0F
+        if (period == "WEEKLY") {
+            listOf(data).map {
+                for (item in it) {
+                    val billingPeriod = parseBillingPeriod(item.billingPeriod)
+                    if (billingPeriod == "WEEKLY") {
+                        calcAmount += item.amount
+                    } else if (billingPeriod == "MONTHLY") {
+                        calcAmount += item.amount * 3/13
+                    } else if(billingPeriod == "YEARLY") {
+                        calcAmount += item.amount / 52
+                    }
+                }
+            }
+        } else if (period == "MONTHLY") {
+            listOf(data).map {
+                for (item in it) {
+                    val billingPeriod = parseBillingPeriod(item.billingPeriod)
+                    if (billingPeriod == "WEEKLY") {
+                        calcAmount += item.amount * 13/3
+                    } else if (billingPeriod == "MONTHLY") {
+                        calcAmount += item.amount
+                    } else if(billingPeriod == "YEARLY") {
+                        calcAmount += item.amount / 12
+                    }
+                }
+            }
+        } else if (period == "YEARLY") {
+            listOf(data).map {
+                for (item in it) {
+                    val billingPeriod = parseBillingPeriod(item.billingPeriod)
+                    if (billingPeriod == "WEEKLY") {
+                        calcAmount += item.amount * 52
+                    } else if (billingPeriod == "MONTHLY") {
+                        calcAmount += item.amount * 12
+                    } else if(billingPeriod == "YEARLY") {
+                        calcAmount += item.amount
+                    }
+                }
+            }
+        }
+        binding.tvAmount.text = getString(R.string.with_dollar_sign, calcAmount.toString());
     }
 
     private fun setupRecyclerView() {

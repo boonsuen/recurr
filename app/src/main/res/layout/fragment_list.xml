@@ -15,19 +15,111 @@
         android:id="@+id/listLayout"
         tools:context=".fragments.list.ListFragment">
 
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:padding="8dp"
-            android:clipToPadding="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/expenseOverviewLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/expense_overview_background"
+                    android:elevation="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:hideExpenseOverview="@{mSharedViewModel.emptyDatabase}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:context=".MainActivity">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:textColor="#E2D4FF"
+                        android:textSize="16sp"
+                        android:gravity="center_horizontal"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="4dp"
+                        android:text="@string/expenses_overview" />
+
+                    <TextView
+                        android:id="@+id/tvAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        tools:text="$1639.82" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupSelection"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp"
+                        android:paddingRight="16dp"
+                        android:paddingLeft="16dp"
+                        android:paddingBottom="16dp"
+                        android:clipToPadding="false">
+
+                        <RadioButton
+                        android:id="@+id/radioButtonWeekly"
+                        style="@style/CustomRadioButton"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:elevation="4dp"
+                        android:gravity="center"
+                        android:layout_marginHorizontal="4dp"
+                        android:text="@string/weekly" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonMonthly"
+                            style="@style/CustomRadioButton"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="4dp"
+                            android:text="@string/monthly" />
+
+                        <RadioButton
+                            android:id="@+id/radioButtonYearly"
+                            style="@style/CustomRadioButton"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="4dp"
+                            android:text="@string/yearly" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
+                    android:padding="8dp"
+                    android:layout_marginBottom="90dp"
+                    android:clipToPadding="false" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
@@ -42,7 +134,8 @@
             app:backgroundTint="#6691FF"
             android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/add_new_subscription" />
 
         <ImageView
             android:id="@+id/no_data_imageView"
@@ -51,11 +144,12 @@
             android:src="@drawable/ic_no_data"
             android:visibility="invisible"
             android:emptyDatabase="@{mSharedViewModel.emptyDatabase}"
-            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/recyclerView"
-            app:layout_constraintVertical_bias="0.37" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.37"
+            android:contentDescription="@string/no_data_imageView" />
 
         <TextView
             android:id="@+id/no_data_textView"
@@ -68,7 +162,7 @@
             android:textColor="#6E6C84"
             android:visibility="invisible"
             android:emptyDatabase="@{mSharedViewModel.emptyDatabase}"
-            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/no_data_imageView" />
     </androidx.constraintlayout.widget.ConstraintLayout>

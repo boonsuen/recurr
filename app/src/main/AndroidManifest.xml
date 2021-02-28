@@ -10,8 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Recurr">
         <activity
-            android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

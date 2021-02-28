@@ -37,6 +37,15 @@ class BindingAdapters {
             }
         }
 
+        @BindingAdapter("android:hideExpenseOverview")
+        @JvmStatic
+        fun hideExpenseOverview(view: View, emptyDatabase: MutableLiveData<Boolean>) {
+            when (emptyDatabase.value) {
+                true -> view.visibility = View.INVISIBLE
+                false -> view.visibility = View.VISIBLE
+            }
+        }
+
         @BindingAdapter("android:parseBillingPeriodToInt")
         @JvmStatic
         fun parseBillingPeriodToInt(view: Spinner, billingPeriod: BillingPeriod) {
