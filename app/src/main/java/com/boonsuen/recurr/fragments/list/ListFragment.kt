@@ -2,28 +2,23 @@ package com.boonsuen.recurr.fragments.list
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.ImageView
-import android.widget.RadioGroup
-import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.boonsuen.recurr.R
 import com.boonsuen.recurr.data.models.BillingPeriod
 import com.boonsuen.recurr.data.models.SubscriptionData
 import com.boonsuen.recurr.data.viewmodel.SubscriptionViewModel
-import com.boonsuen.recurr.databinding.FragmentAddBinding
 import com.boonsuen.recurr.databinding.FragmentListBinding
 import com.boonsuen.recurr.fragments.SharedViewModel
 import com.boonsuen.recurr.utils.hideKeyboard
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.robinhood.ticker.TickerUtils
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class ListFragment : Fragment() {
 
@@ -60,7 +55,7 @@ class ListFragment : Fragment() {
                 R.id.radioButtonMonthly -> updateExpensesOverviewAmount(data, "MONTHLY")
                 R.id.radioButtonYearly -> updateExpensesOverviewAmount(data, "YEARLY")
             }
-            binding.radioGroupSelection.setOnCheckedChangeListener {group, checkedId ->
+            binding.radioGroupSelection.setOnCheckedChangeListener { group, checkedId ->
                 when (checkedId) {
                     R.id.radioButtonWeekly -> updateExpensesOverviewAmount(data, "WEEKLY")
                     R.id.radioButtonMonthly -> updateExpensesOverviewAmount(data, "MONTHLY")
@@ -74,6 +69,10 @@ class ListFragment : Fragment() {
 
         // Hide soft keyboard
         hideKeyboard(requireActivity())
+
+        // Robinhood Ticker
+        binding.tvAmount.setCharacterLists(TickerUtils.provideNumberList())
+        binding.tvAmount.typeface = ResourcesCompat.getFont(requireContext(), R.font.inter_bold)
 
         return view
     }
@@ -128,7 +127,9 @@ class ListFragment : Fragment() {
                 }
             }
         }
-        binding.tvAmount.text = getString(R.string.with_dollar_sign, calcAmount.toString());
+        val formatter: NumberFormat = DecimalFormat("#,##0.00")
+        val formattedCalcAmount: String = formatter.format(calcAmount)
+        binding.tvAmount.text = getString(R.string.with_dollar_sign, formattedCalcAmount);
     }
 
     private fun setupRecyclerView() {
@@ -143,13 +144,53 @@ class ListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_sortBy_name_ascending -> mSubscriptionViewModel.sortByNameAscending.observe(this, { adapter.setData(it) })
-            R.id.menu_sortBy_name_descending -> mSubscriptionViewModel.sortByNameDescending.observe(this, { adapter.setData(it) })
-            R.id.menu_sortBy_amount_low_to_high -> mSubscriptionViewModel.sortByAmountLowToHigh.observe(this, { adapter.setData(it) })
-            R.id.menu_sortBy_amount_high_to_low -> mSubscriptionViewModel.sortByAmountHighToLow.observe(this, { adapter.setData(it) })
-            R.id.menu_sortBy_billingPeriod_short_to_long -> mSubscriptionViewModel.sortByBillingPeriodShortToLong.observe(this, Observer { adapter.setData(it) })
-            R.id.menu_sortBy_billingPeriod_long_to_short -> mSubscriptionViewModel.sortByBillingPeriodLongToShort.observe(this, Observer { adapter.setData(it) })
-            R.id.menu_clear_sort -> mSubscriptionViewModel.getAllData.observe(this, { adapter.setData(it) })
+            R.id.menu_sortBy_name_ascending -> mSubscriptionViewModel.sortByNameAscending.observe(
+                this,
+                {
+                    adapter.setData(
+                        it
+                    )
+                })
+            R.id.menu_sortBy_name_descending -> mSubscriptionViewModel.sortByNameDescending.observe(
+                this,
+                {
+                    adapter.setData(
+                        it
+                    )
+                })
+            R.id.menu_sortBy_amount_low_to_high -> mSubscriptionViewModel.sortByAmountLowToHigh.observe(
+                this,
+                {
+                    adapter.setData(
+                        it
+                    )
+                })
+            R.id.menu_sortBy_amount_high_to_low -> mSubscriptionViewModel.sortByAmountHighToLow.observe(
+                this,
+                {
+                    adapter.setData(
+                        it
+                    )
+                })
+            R.id.menu_sortBy_billingPeriod_short_to_long -> mSubscriptionViewModel.sortByBillingPeriodShortToLong.observe(
+                this,
+                Observer {
+                    adapter.setData(
+                        it
+                    )
+                })
+            R.id.menu_sortBy_billingPeriod_long_to_short -> mSubscriptionViewModel.sortByBillingPeriodLongToShort.observe(
+                this,
+                Observer {
+                    adapter.setData(
+                        it
+                    )
+                })
+            R.id.menu_clear_sort -> mSubscriptionViewModel.getAllData.observe(this, {
+                adapter.setData(
+                    it
+                )
+            })
             R.id.menu_delete_all -> confirmRemoval()
         }
         return super.onOptionsItemSelected(item)
@@ -161,13 +202,13 @@ class ListFragment : Fragment() {
         builder.setPositiveButton("Yes") { _, _ ->
             mSubscriptionViewModel.deleteAll()
             Toast.makeText(
-                    requireContext(),
-                    "Successfully removed everything!",
-                    Toast.LENGTH_SHORT
+                requireContext(),
+                "Successfully removed everything!",
+                Toast.LENGTH_SHORT
             ).show()
         }
         builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete everything?")
+        builder.setTitle("Delete all items?")
         builder.setMessage("Are you sure you want to remove everything?")
         builder.create().show()
     }

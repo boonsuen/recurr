@@ -76,4 +76,7 @@ dependencies {
     // DataBinding
     kapt "com.android.databinding:compiler:3.2.0-alpha10"
     kapt "androidx.databinding:databinding-common:4.1.2"
+
+    // Robinhood Ticker
+    implementation 'com.robinhood.ticker:ticker:2.0.2'
 }

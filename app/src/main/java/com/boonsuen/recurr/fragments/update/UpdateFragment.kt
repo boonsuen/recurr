@@ -69,7 +69,7 @@ class UpdateFragment : Fragment() {
             val updatedItem = SubscriptionData(
                     args.currentItem.id,
                     name,
-                    parseFloat(amount),
+                    (Math.round(parseFloat(amount) * 100.0) / 100.0).toFloat(),
                     mSharedViewModel.parseBillingPeriod(getBillingPeriod)
             )
             mSubscriptionViewModel.updateData(updatedItem)

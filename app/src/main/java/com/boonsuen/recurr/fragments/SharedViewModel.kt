@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import com.boonsuen.recurr.R
 import com.boonsuen.recurr.data.models.BillingPeriod
 import com.boonsuen.recurr.data.models.SubscriptionData
+import java.lang.Float.parseFloat
 
 class SharedViewModel(application: Application): AndroidViewModel(application) {
 
@@ -42,6 +43,12 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         }
 
     fun verifyDataFromUser(name: String, amount: String): Boolean {
+        try {
+            parseFloat(amount)
+        } catch (e: Exception) {
+            return false
+        }
+
         return !(TextUtils.isEmpty(name) || TextUtils.isEmpty(amount))
     }
 

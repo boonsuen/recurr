@@ -53,11 +53,10 @@
                         android:paddingBottom="4dp"
                         android:text="@string/expenses_overview" />
 
-                    <TextView
+                    <com.robinhood.ticker.TickerView
                         android:id="@+id/tvAmount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_bold"
                         android:gravity="center"
                         android:textColor="@color/white"
                         android:textSize="24sp"

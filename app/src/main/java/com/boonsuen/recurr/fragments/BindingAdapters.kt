@@ -14,6 +14,8 @@ import com.boonsuen.recurr.data.models.BillingPeriod
 import com.boonsuen.recurr.data.models.SubscriptionData
 import com.boonsuen.recurr.fragments.list.ListFragmentDirections
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class BindingAdapters {
 
@@ -50,9 +52,15 @@ class BindingAdapters {
         @JvmStatic
         fun parseBillingPeriodToInt(view: Spinner, billingPeriod: BillingPeriod) {
             when (billingPeriod) {
-                BillingPeriod.MONTHLY -> { view.setSelection(0) }
-                BillingPeriod.WEEKLY -> { view.setSelection(1) }
-                BillingPeriod.YEARLY -> { view.setSelection(2) }
+                BillingPeriod.MONTHLY -> {
+                    view.setSelection(0)
+                }
+                BillingPeriod.WEEKLY -> {
+                    view.setSelection(1)
+                }
+                BillingPeriod.YEARLY -> {
+                    view.setSelection(2)
+                }
             }
         }
 
@@ -60,9 +68,15 @@ class BindingAdapters {
         @JvmStatic
         fun parseBillingPeriodColor(cardView: CardView, billingPeriod: BillingPeriod) {
             when (billingPeriod) {
-                BillingPeriod.MONTHLY -> { cardView.setCardBackgroundColor(cardView.context.getColor(R.color.red)) }
-                BillingPeriod.WEEKLY -> { cardView.setCardBackgroundColor(cardView.context.getColor(R.color.yellow)) }
-                BillingPeriod.YEARLY -> { cardView.setCardBackgroundColor(cardView.context.getColor(R.color.green)) }
+                BillingPeriod.MONTHLY -> {
+                    cardView.setCardBackgroundColor(cardView.context.getColor(R.color.red))
+                }
+                BillingPeriod.WEEKLY -> {
+                    cardView.setCardBackgroundColor(cardView.context.getColor(R.color.yellow))
+                }
+                BillingPeriod.YEARLY -> {
+                    cardView.setCardBackgroundColor(cardView.context.getColor(R.color.green))
+                }
             }
         }
 
@@ -86,16 +100,18 @@ class BindingAdapters {
         @BindingAdapter("android:rowLayoutAmount", "android:rowLayoutBillingPeriod")
         @JvmStatic
         fun amountText(view: TextView, amount: Float, billingPeriod: BillingPeriod) {
-            val amountStr = amount.toString()
+            val formatter: NumberFormat = DecimalFormat("#,##0.00")
+            val amountStr: String = formatter.format(amount)
+
             when (billingPeriod) {
                 BillingPeriod.MONTHLY -> {
-                    view.setText("$${amountStr} per month")
+                    view.setText("$${amountStr} / month")
                 }
                 BillingPeriod.WEEKLY -> {
-                    view.setText("$${amountStr} per week")
+                    view.setText("$${amountStr} / week")
                 }
                 BillingPeriod.YEARLY -> {
-                    view.setText("$${amountStr} per year")
+                    view.setText("$${amountStr} / year")
                 }
             }
         }

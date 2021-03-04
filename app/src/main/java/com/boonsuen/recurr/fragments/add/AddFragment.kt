@@ -14,6 +14,8 @@ import com.boonsuen.recurr.data.viewmodel.SubscriptionViewModel
 import com.boonsuen.recurr.databinding.FragmentAddBinding
 import com.boonsuen.recurr.fragments.SharedViewModel
 import java.lang.Float.parseFloat
+import java.lang.Math.round
+import kotlin.math.roundToLong
 
 class AddFragment : Fragment() {
 
@@ -57,10 +59,11 @@ class AddFragment : Fragment() {
         val validation = mSharedViewModel.verifyDataFromUser(mName, mAmount)
         if (validation) {
             // Insert Data to Database
+            round(3.14159265359 * 100) / 100
             val newData = SubscriptionData(
                     0,
                     mName,
-                    parseFloat(mAmount),
+                    (round(parseFloat(mAmount) * 100.0 ) / 100.0).toFloat(),
                     mSharedViewModel.parseBillingPeriod(mBillingPeriod)
             )
             mSubscriptionViewModel.insertData(newData)
