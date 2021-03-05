@@ -86,44 +86,25 @@ class ListFragment : Fragment() {
                 BillingPeriod.YEARLY -> "YEARLY"
             }
         }
+
         var calcAmount = 0.0F
-        if (period == "WEEKLY") {
-            listOf(data).map {
-                for (item in it) {
-                    val billingPeriod = parseBillingPeriod(item.billingPeriod)
-                    if (billingPeriod == "WEEKLY") {
-                        calcAmount += item.amount
-                    } else if (billingPeriod == "MONTHLY") {
-                        calcAmount += item.amount * 3/13
-                    } else if(billingPeriod == "YEARLY") {
-                        calcAmount += item.amount / 52
-                    }
-                }
-            }
-        } else if (period == "MONTHLY") {
-            listOf(data).map {
-                for (item in it) {
-                    val billingPeriod = parseBillingPeriod(item.billingPeriod)
-                    if (billingPeriod == "WEEKLY") {
-                        calcAmount += item.amount * 13/3
-                    } else if (billingPeriod == "MONTHLY") {
-                        calcAmount += item.amount
-                    } else if(billingPeriod == "YEARLY") {
-                        calcAmount += item.amount / 12
-                    }
-                }
-            }
-        } else if (period == "YEARLY") {
-            listOf(data).map {
-                for (item in it) {
-                    val billingPeriod = parseBillingPeriod(item.billingPeriod)
-                    if (billingPeriod == "WEEKLY") {
-                        calcAmount += item.amount * 52
-                    } else if (billingPeriod == "MONTHLY") {
-                        calcAmount += item.amount * 12
-                    } else if(billingPeriod == "YEARLY") {
-                        calcAmount += item.amount
-                    }
+        listOf(data).map {
+            for (item in it) {
+                val itemBillingPeriod = parseBillingPeriod(item.billingPeriod)
+                if (itemBillingPeriod == period) {
+                    calcAmount += item.amount
+                } else if (itemBillingPeriod == "WEEKLY" && period == "MONTHLY") {
+                    calcAmount += item.amount * 13/3
+                } else if (itemBillingPeriod == "WEEKLY" && period == "YEARLY") {
+                    calcAmount += item.amount * 52
+                } else if(itemBillingPeriod == "MONTHLY" && period == "WEEKLY") {
+                    calcAmount += item.amount * 3/13
+                } else if(itemBillingPeriod == "MONTHLY" && period == "YEARLY") {
+                    calcAmount += item.amount * 12
+                } else if(itemBillingPeriod == "YEARLY" && period == "WEEKLY") {
+                    calcAmount += item.amount / 52
+                } else if(itemBillingPeriod == "YEARLY" && period == "MONTHLY") {
+                    calcAmount += item.amount / 12
                 }
             }
         }
