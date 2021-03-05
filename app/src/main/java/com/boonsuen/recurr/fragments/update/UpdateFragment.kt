@@ -43,6 +43,10 @@ class UpdateFragment : Fragment() {
         // Spinner Item Selected Listener
         binding.currentBillingPeriodSpinner.onItemSelectedListener = mSharedViewModel.listener
 
+        binding.buttonUpdate.setOnClickListener {
+            updateItem()
+        }
+
         return view
     }
 
@@ -52,7 +56,6 @@ class UpdateFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_save -> updateItem()
             R.id.menu_delete -> confirmItemRemoval()
         }
         return super.onOptionsItemSelected(item)

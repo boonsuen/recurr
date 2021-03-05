@@ -32,23 +32,13 @@ class AddFragment : Fragment() {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        // Set Menu
-        setHasOptionsMenu(true)
-
         binding.billingPeriodSpinner.onItemSelectedListener = mSharedViewModel.listener
 
-        return view
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.add_fragment_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_add) {
+        binding.buttonAdd.setOnClickListener{
             insertDataToDb()
         }
-        return super.onOptionsItemSelected(item)
+
+        return view
     }
 
     private fun insertDataToDb() {

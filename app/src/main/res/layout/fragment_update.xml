@@ -113,5 +113,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_current_billing_period_tv" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="14dp"
+            android:background="@drawable/update_button_background"
+            android:drawableStart="@drawable/ic_save"
+            android:drawableTint="@color/white"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/inter_medium"
+            android:paddingHorizontal="20dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:layout_marginTop="26dp"
+            android:text="@string/update_subscription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/current_billing_period_spinner" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

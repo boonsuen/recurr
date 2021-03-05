@@ -17,6 +17,8 @@
     <string name="add_new_subscription">Add New Subscription</string>
     <string name="no_data_imageView">No Data</string>
     <string name="with_dollar_sign">$%1$s</string>
+    <string name="add_subscription">Add Subscription</string>
+    <string name="update_subscription">Update Subscription</string>
     <string-array name="billing_period">
         <item>Monthly</item>
         <item>Weekly</item>
