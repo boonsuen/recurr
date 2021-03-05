@@ -30,7 +30,7 @@
                 android:id="@+id/billing_period_indicator"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:parseBillingPeriodColor="@{subscriptionData.billingPeriod}"
                 app:cardBackgroundColor="@color/red"

@@ -1,7 +1,5 @@
 package com.boonsuen.recurr.fragments
 
-import android.provider.Settings.Global.getString
-import android.provider.Settings.Secure.getString
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
@@ -72,13 +70,22 @@ class BindingAdapters {
         fun parseBillingPeriodColor(cardView: CardView, billingPeriod: BillingPeriod) {
             when (billingPeriod) {
                 BillingPeriod.MONTHLY -> {
-                    cardView.setCardBackgroundColor(cardView.context.getColor(R.color.red))
+                    cardView.background = ContextCompat.getDrawable(
+                            cardView.context,
+                            R.drawable.billing_period_indicator_monthly_background
+                    )
                 }
                 BillingPeriod.WEEKLY -> {
-                    cardView.setCardBackgroundColor(cardView.context.getColor(R.color.yellow))
+                    cardView.background = ContextCompat.getDrawable(
+                            cardView.context,
+                            R.drawable.billing_period_indicator_weekly_background
+                    )
                 }
                 BillingPeriod.YEARLY -> {
-                    cardView.setCardBackgroundColor(cardView.context.getColor(R.color.green))
+                    cardView.background = ContextCompat.getDrawable(
+                            cardView.context,
+                            R.drawable.billing_period_indicator_yearly_background
+                    )
                 }
             }
         }

@@ -23,25 +23,6 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         emptyDatabase.value = subscriptionData.isEmpty()
     }
 
-    /** ============== Add/Update Fragment ============== */
-
-    val listener: AdapterView.OnItemSelectedListener = object :
-        AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-            ) {
-                when (position) {
-                    0 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.red)) }
-                    1 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.yellow)) }
-                    2 -> { (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.green)) }
-                }
-            }
-        }
-
     fun verifyDataFromUser(name: String, amount: String): Boolean {
         try {
             parseFloat(amount)

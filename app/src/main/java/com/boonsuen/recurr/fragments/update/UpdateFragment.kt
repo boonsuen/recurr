@@ -40,9 +40,6 @@ class UpdateFragment : Fragment() {
         // Set Menu
         setHasOptionsMenu(true)
 
-        // Spinner Item Selected Listener
-        binding.currentBillingPeriodSpinner.onItemSelectedListener = mSharedViewModel.listener
-
         binding.buttonUpdate.setOnClickListener {
             updateItem()
         }

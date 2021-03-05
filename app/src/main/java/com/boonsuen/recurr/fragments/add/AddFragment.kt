@@ -32,8 +32,6 @@ class AddFragment : Fragment() {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        binding.billingPeriodSpinner.onItemSelectedListener = mSharedViewModel.listener
-
         binding.buttonAdd.setOnClickListener{
             insertDataToDb()
         }
