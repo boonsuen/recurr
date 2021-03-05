@@ -1,11 +1,14 @@
 package com.boonsuen.recurr.fragments
 
+import android.provider.Settings.Global.getString
+import android.provider.Settings.Secure.getString
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -102,6 +105,10 @@ class BindingAdapters {
         fun amountText(view: TextView, amount: Float, billingPeriod: BillingPeriod) {
             val formatter: NumberFormat = DecimalFormat("#,##0.00")
             val amountStr: String = formatter.format(amount)
+
+            if (amountStr == "0.00") {
+                return view.setText(R.string.free)
+            }
 
             when (billingPeriod) {
                 BillingPeriod.MONTHLY -> {

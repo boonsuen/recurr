@@ -19,6 +19,7 @@
     <string name="with_dollar_sign">$%1$s</string>
     <string name="add_subscription">Add Subscription</string>
     <string name="update_subscription">Update Subscription</string>
+    <string name="free">Free</string>
     <string-array name="billing_period">
         <item>Monthly</item>
         <item>Weekly</item>
