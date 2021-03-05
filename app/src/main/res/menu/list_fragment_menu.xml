@@ -5,14 +5,14 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_sortBy_name"
-            android:title="Sort by Name">
+            android:title="@string/sort_by_name">
             <menu>
                 <item
                     android:id="@+id/menu_sortBy_name_ascending"
-                    android:title="Ascending" />
+                    android:title="@string/ascending" />
                 <item
                     android:id="@+id/menu_sortBy_name_descending"
-                    android:title="Descending" />
+                    android:title="@string/descending" />
             </menu>
         </item>
     </group>
@@ -20,14 +20,14 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_sortBy_amount"
-            android:title="Sort by Amount">
+            android:title="@string/sort_by_amount">
             <menu>
                 <item
                     android:id="@+id/menu_sortBy_amount_low_to_high"
-                    android:title="Low to High" />
+                    android:title="@string/low_to_high" />
                 <item
                     android:id="@+id/menu_sortBy_amount_high_to_low"
-                    android:title="High to Low" />
+                    android:title="@string/high_to_low" />
             </menu>
         </item>
     </group>
@@ -49,7 +49,7 @@
 
     <item
         android:id="@+id/menu_clear_sort"
-        android:title="Clear Sort"
+        android:title="@string/clear_sort"
         app:showAsAction="never" />
 
     <item

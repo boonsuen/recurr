@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">Recurr</string>
     <string name="no_data">"Get started by adding\nyour first subscription"</string>
-    <string name="name">Name e.g. Spotify</string>
-    <string name="amount">Amount $</string>
+    <string name="name_placeholder">Name e.g. Spotify</string>
+    <string name="amount_placeholder">Amount $</string>
     <string name="sort_by_billing_period">Sort by Billing Period</string>
     <string name="short_to_long">Short to Long</string>
     <string name="long_to_short">Long to Short</string>
     <string name="delete_all">Delete All</string>
     <string name="add">Add</string>
-    <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="expenses_overview">Expenses Overview</string>
     <string name="weekly">Weekly</string>
@@ -17,9 +16,23 @@
     <string name="add_new_subscription">Add New Subscription</string>
     <string name="no_data_imageView">No Data</string>
     <string name="with_dollar_sign">$%1$s</string>
+    <string name="amount_txt_monthly">$%1$s / month</string>
+    <string name="amount_txt_weekly">$%1$s / week</string>
+    <string name="amount_txt_yearly">$%1$s / year</string>
     <string name="add_subscription">Add Subscription</string>
     <string name="update_subscription">Update Subscription</string>
     <string name="free">Free</string>
+    <string name="sort_by_name">Sort by Name</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+    <string name="sort_by_amount">Sort by Amount</string>
+    <string name="low_to_high">Low to High</string>
+    <string name="high_to_low">High to Low</string>
+    <string name="clear_sort">Clear Sort</string>
+    <string name="billing_period">Billing Period</string>
+    <string name="amount">Amount</string>
+    <string name="name">Name</string>
+    <string name="add_a_subscription">Add a Subscription</string>
     <string-array name="billing_period">
         <item>Monthly</item>
         <item>Weekly</item>

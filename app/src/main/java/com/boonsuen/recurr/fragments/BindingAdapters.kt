@@ -1,5 +1,7 @@
 package com.boonsuen.recurr.fragments
 
+import android.content.res.Resources
+import android.provider.Settings.Global.getString
 import android.view.View
 import android.widget.EditText
 import android.widget.Spinner
@@ -7,6 +9,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
@@ -119,13 +122,13 @@ class BindingAdapters {
 
             when (billingPeriod) {
                 BillingPeriod.MONTHLY -> {
-                    view.setText("$${amountStr} / month")
+                    view.text = view.context.getString(R.string.amount_txt_monthly, amountStr)
                 }
                 BillingPeriod.WEEKLY -> {
-                    view.setText("$${amountStr} / week")
+                    view.text = view.context.getString(R.string.amount_txt_weekly, amountStr)
                 }
                 BillingPeriod.YEARLY -> {
-                    view.setText("$${amountStr} / year")
+                    view.text = view.context.getString(R.string.amount_txt_yearly, amountStr)
                 }
             }
         }

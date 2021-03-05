@@ -110,7 +110,7 @@ class ListFragment : Fragment() {
         }
         val formatter: NumberFormat = DecimalFormat("#,##0.00")
         val formattedCalcAmount: String = formatter.format(calcAmount)
-        binding.tvAmount.text = getString(R.string.with_dollar_sign, formattedCalcAmount);
+        binding.tvAmount.text = getString(R.string.with_dollar_sign, formattedCalcAmount)
     }
 
     private fun setupRecyclerView() {
