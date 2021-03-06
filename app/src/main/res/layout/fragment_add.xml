@@ -71,6 +71,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/custom_input"
         android:ems="10"
+        android:maxLength="12"
         android:hint="@string/amount_placeholder"
         android:inputType="numberDecimal"
         android:paddingStart="20dp"
