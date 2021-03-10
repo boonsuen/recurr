@@ -79,7 +79,7 @@
             android:background="@drawable/custom_input"
             android:hint="@string/amount_placeholder"
             android:ems="10"
-            android:maxLength="12"
+            android:maxLength="7"
             android:inputType="numberDecimal"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
